@@ -80,22 +80,22 @@ public class LiveEnvironment {
                 cells.put(new Coordinate(leftTop.getX() - 1, leftTop.getY() -1), new Cell(CellState.DEAD));
             }
             if (boundNeedExpand.get("RIGHT")) {
-                cells.put(new Coordinate(rightBottom.getX() + 1, leftTop.getY() -1), new Cell(CellState.DEAD));
+                cells.put(new Coordinate(leftTop.getX() - 1, rightBottom.getY() +1), new Cell(CellState.DEAD));
             }
         }
     }
 
     private void expandLeftAndRightBound(Coordinate leftTop, Coordinate rightBottom, HashMap<String, Boolean> boundNeedExpand) {
-        for(int row = leftTop.getY(); row < rightBottom.getY(); row++) {
-            if(boundNeedExpand.get("LEFT")) cells.put(new Coordinate(row + 1, leftTop.getX() -1), new Cell(CellState.DEAD));
-            if(boundNeedExpand.get("RIGHT")) cells.put(new Coordinate(row + 1, rightBottom.getX() +1), new Cell(CellState.DEAD));
+        for(int row = leftTop.getX(); row <= rightBottom.getX(); row++) {
+            if(boundNeedExpand.get("LEFT")) cells.put(new Coordinate(row, leftTop.getY() -1), new Cell(CellState.DEAD));
+            if(boundNeedExpand.get("RIGHT")) cells.put(new Coordinate(row, rightBottom.getY() +1), new Cell(CellState.DEAD));
         }
     }
 
     private void expandTopAndBottomBound(Coordinate leftTop, Coordinate rightBottom, HashMap<String, Boolean> boundNeedExpand) {
-        for(int col = leftTop.getX(); col < rightBottom.getX(); col++) {
-            if(boundNeedExpand.get("TOP")) cells.put(new Coordinate(leftTop.getY()-1, col), new Cell(CellState.DEAD));
-            if(boundNeedExpand.get("BOTTOM")) cells.put(new Coordinate(rightBottom.getY() + 1, col), new Cell(CellState.DEAD));
+        for(int col = leftTop.getY(); col <= rightBottom.getY(); col++) {
+            if(boundNeedExpand.get("TOP")) cells.put(new Coordinate(leftTop.getX()-1, col), new Cell(CellState.DEAD));
+            if(boundNeedExpand.get("BOTTOM")) cells.put(new Coordinate(rightBottom.getX() + 1, col), new Cell(CellState.DEAD));
         }
     }
 
